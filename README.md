@@ -1,4 +1,2 @@
-# hello-world
-just another repository
-
-Hello this is a test
+# Algorithms
+This repository is the place that i save algorithms i made
