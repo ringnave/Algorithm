@@ -152,4 +152,31 @@ public class Sort {
 			
 			return i+1;
 		}
+		
+		//time O(n), space O(n+k)
+		//A is the input array, B is the result array and C is temporary array
+		//n is length of A, k is the maximum number that it sorts.
+		//Counting Sort is sorting algorithm for natural number. 
+		public void countingSort(int[] A, int[] B, int n, int k) {
+			int[] C = new int[k+1];
+			
+			for(int i=0; i<n; i++) {
+				C[A[i]]++;
+			}
+			
+			for(int i=2; i<k+1; i++) {
+				C[i] = C[i] + C[i-1];
+			}
+			
+			for(int i=n-1; i>=0; i--) {
+				B[C[A[i]]-1] = A[i];
+				C[A[i]]--; // It makes adding duplicated number possible. It means pivot if the number is same.
+				// C array means last index of the input number.
+			}
+
+			for(int i=0; i<A.length; i++) {
+				A[i] = B[i];
+			}
+			
+		}
 }
