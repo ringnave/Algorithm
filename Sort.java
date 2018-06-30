@@ -2,7 +2,11 @@ package com.jiungkris.algorithm;
 
 public class Sort {
 	
-	//time O(N^2), space O(1)
+		/**time O(n^2), space O(1)
+		 * @param A array to sort
+		 * @param n length of array
+		 * @return sorted array
+		 */
 		public int[] bubbleSort(int[] A, int n) {
 			for(int last = n-1; last >= 1; last--) {
 				for(int i=0; i<last; i++) {
@@ -17,7 +21,11 @@ public class Sort {
 			return A;
 		}
 		
-		//time O(n^2), space O(1)
+		/**time O(n^2), space O(1)
+		 * @param A array to sort
+		 * @param n length of array
+		 * @return sorted array
+		 */
 		public int[] selectionSort(int[] A, int n) {
 			for(int last = n-1; last>=1; last--) {
 				int max = 0;
@@ -36,7 +44,11 @@ public class Sort {
 			return A;
 		}
 		
-		//time O(n^2), space O(1)
+		/**time O(n^2), space O(1)
+		 * @param A array to sort
+		 * @param n length of array
+		 * @return sorted array
+		 */
 		public int[] insertionSort(int[] A, int n) {
 			for(int i=1; i<n; i++) {
 				int loc = i-1;
@@ -50,8 +62,11 @@ public class Sort {
 			return A;
 		}
 		
-		//time O(nlogn), space O(n)
-		//p and r is index numbers.
+		/**time O(nlogn), space O(n)
+		 * @param A array to sort
+		 * @param p index start number
+		 * @param r index end number
+		 */
 		public void mergeSort(int[] A, int p, int r) {
 			if(p < r) {
 				int q = (p+r)/2;
@@ -80,7 +95,10 @@ public class Sort {
 			}
 		}
 		
-		//time O(nlogn), space O(1)
+		/**time O(nlogn), space O(1)
+		 * @param A array to sort
+		 * @param n length of array
+		 */
 		public void heapSort(int[] A, int n) {
 			int[] tmpArr = new int[A.length];
 			int tmpIndex = 0;
@@ -125,8 +143,11 @@ public class Sort {
 			}
 		}
 		
-		//time O(nlogn), space O(1)
-		//p and r is index numbers.
+		/**time O(nlogn), space O(1)
+		 * @param A array to sort
+		 * @param p index start number
+		 * @param r index end number
+		 */
 		public void quickSort(int[] A, int p, int r) {
 			if(p < r) {
 				int q = partition(A, p, r);
@@ -153,11 +174,15 @@ public class Sort {
 			return i+1;
 		}
 		
-		//time O(n), space O(n+k)
-		//A is the input array, B is the result array and C is temporary array
-		//n is length of A, k is the maximum number that it sorts.
-		//Counting Sort is sorting algorithm for natural number. 
-		public void countingSort(int[] A, int[] B, int n, int k) {
+		/**time O(n), space O(n+k).
+		 * A is the input array, B is the result array and C is temporary array.
+		 * Counting Sort is sorting algorithm for natural number.
+		 * @param A the input array
+		 * @param n length of array
+		 */
+		public void countingSort(int[] A, int n) {
+			int k = getMax(A, A.length);
+			int[] B = new int[n];
 			int[] C = new int[k+1];
 			
 			for(int i=0; i<n; i++) {
@@ -179,4 +204,46 @@ public class Sort {
 			}
 			
 		}
+		
+		/**time O(n), space O(n)
+		 * @param A array to sort
+		 * @param n length of array
+		 * */
+		public void radixSort(int[] A, int n) {
+	        int max = getMax(A, n);
+	        for (int digit = 1; max/digit > 0; digit *= 10)
+	            countingSortByDigit(A, n, digit);
+		}
+		
+		private int getMax(int A[], int n) {
+	        int max = A[0];
+	        for (int i = 1; i < n; i++) {
+	        	if (A[i] > max) {
+	            	max = A[i];
+	            }
+	        }
+	               
+	        return max;
+	    }
+		
+	    private void countingSortByDigit(int A[], int n, int digit) {
+	    	int k = getMax(A, A.length);
+	        int[] B = new int[n];
+	        int[] C = new int[k+1];
+	 
+	        for (int i = 0; i < n; i++)
+	            C[ (A[i]/digit)%10 ]++;
+	 
+	        for (int i = 1; i < 10; i++)
+	        	C[i] = C[i] + C[i-1];
+
+	        for (int i = n - 1; i >= 0; i--)
+	        {
+	            B[C[ (A[i]/digit)%10 ] - 1] = A[i];
+	            C[ (A[i]/digit)%10 ]--;
+	        }
+
+	        for (int i = 0; i < n; i++)
+	            A[i] = B[i];
+	    }
 }
