@@ -224,9 +224,9 @@ public class Sort {
 	        }
 	               
 	        return max;
-	    }
+		}
 		
-	    private void countingSortByDigit(int A[], int n, int digit) {
+		private void countingSortByDigit(int A[], int n, int digit) {
 	    	int k = getMax(A, A.length);
 	        int[] B = new int[n];
 	        int[] C = new int[k+1];
@@ -245,5 +245,5 @@ public class Sort {
 
 	        for (int i = 0; i < n; i++)
 	            A[i] = B[i];
-	    }
+		}
 }
