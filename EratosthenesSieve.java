@@ -6,6 +6,7 @@ public class EratosthenesSieve {
 	
 	/**
 	 * Eratosthenes' Sieve (Prime number algorithm)
+	 * Time complexity O(n(logn)(loglogn)), space complexity O(n).
 	 * @param num You can find the prime numbers until the num.
 	 * @return Array of the prime numbers that you found.
 	 */
